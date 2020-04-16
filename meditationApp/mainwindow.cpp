@@ -31,13 +31,13 @@ void MainWindow::reset_progressBar()
 
 void MainWindow::update_progressBar()
 {
-    if (state == 0) {
+    if (state == IN) {
         ui->progressBar_in->setValue(gui_seconds+1);
     }
-    else if (state == 1) {
+    else if (state == HOLD) {
         ui->progressBar_hold->setValue(gui_seconds+1);
     }
-    else if (state == 2) {
+    else if (state == OUT) {
         ui->progressBar_out->setValue(gui_seconds+1);
     }
 }
@@ -65,7 +65,7 @@ void MainWindow::timer_logic()
                 countdown_seconds = 3;
                 num_of_reps = 4;
                 seconds = 0;
-                state = 4;
+                state = COUNTDOWN;
                 reset_progressBar();
                 return;
             }
@@ -74,18 +74,18 @@ void MainWindow::timer_logic()
         reset_progressBar();
     }
     if (seconds == 0 || seconds == 19) {
-        state = 0;
+        state = IN;
         gui_seconds = 0;
         in_sound.play();
     }
     else if (seconds == 4) {
-        state = 1;
+        state = HOLD;
         gui_seconds = 0;
         hold_sound.play();
     }
     else if (seconds == 11) {
-        state = 2;
-        gui_seconds = 0;        
+        state = OUT;
+        gui_seconds = 0;
         out_sound.play();
     }
 }
@@ -93,13 +93,16 @@ void MainWindow::timer_logic()
 
 void MainWindow::UpdateTime()
 {
-    while (countdown_seconds != -1) {
+    while (state == COUNTDOWN) {
         ui->lbl_count_down->setText(QString::number(countdown_seconds));
         countdown_seconds--;
+        if (countdown_seconds == 0) {
+            state = IN;
+        }
         return;
     }
     timer_logic();
-    if (state == 4) {
+    if (state == COUNTDOWN) {
         return;
     }
     update_progressBar();

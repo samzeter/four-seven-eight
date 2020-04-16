@@ -29,7 +29,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-
     QTimer *timer_1s;
     int seconds{0};
     int gui_seconds{0};
@@ -41,5 +40,6 @@ private:
     QSound out_sound;
     void update_progressBar();
     bool finished = false;
+    enum State{IN, HOLD, OUT, COUNTDOWN};
 };
 #endif // MAINWINDOW_H
