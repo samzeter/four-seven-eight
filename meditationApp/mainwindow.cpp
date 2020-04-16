@@ -4,9 +4,9 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , in_sound("/Users/samz/dev/meditationApp/meditationApp/in.wav")
-    , hold_sound("/Users/samz/dev/meditationApp/meditationApp/hold.wav")
-    , out_sound("/Users/samz/dev/meditationApp/meditationApp/out.wav")
+    , in_sound(":/files/sounds/in.wav")
+    , hold_sound(":/files/sounds/hold.wav")
+    , out_sound(":/files/sounds/out.wav")
 {
     ui->setupUi(this);
     timer_1s = new QTimer(this);
@@ -48,7 +48,7 @@ void MainWindow::timer_logic()
     if (seconds % 19 == 0 && seconds != 0) {
         seconds = 0;
         num_of_reps--;
-        if (num_of_reps == 3) {
+        if (num_of_reps == 0) {
             switch( QMessageBox::question(
                         this,
                         tr("Timer finished"),
@@ -74,9 +74,9 @@ void MainWindow::timer_logic()
         reset_progressBar();
     }
     if (seconds == 0 || seconds == 19) {
+        //in_sound.play();
         state = IN;
         gui_seconds = 0;
-        in_sound.play();
     }
     else if (seconds == 4) {
         state = HOLD;
@@ -96,7 +96,7 @@ void MainWindow::UpdateTime()
     while (state == COUNTDOWN) {
         ui->lbl_count_down->setText(QString::number(countdown_seconds));
         countdown_seconds--;
-        if (countdown_seconds == 0) {
+        if (countdown_seconds == -1) {
             state = IN;
         }
         return;

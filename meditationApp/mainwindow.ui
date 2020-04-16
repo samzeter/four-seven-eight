@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Time</string>
+   <string>4-7-8  Meditation Timer</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label_2">

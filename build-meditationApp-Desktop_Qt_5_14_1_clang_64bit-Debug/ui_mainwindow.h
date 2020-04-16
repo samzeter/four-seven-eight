@@ -133,7 +133,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Time", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "4-7-8  Meditation Timer", nullptr));
         actionReset->setText(QCoreApplication::translate("MainWindow", "Reset", nullptr));
         actionQuit->setText(QCoreApplication::translate("MainWindow", "Quit", nullptr));
         actionSound->setText(QCoreApplication::translate("MainWindow", "Sound", nullptr));

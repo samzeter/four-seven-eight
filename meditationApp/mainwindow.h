@@ -31,7 +31,7 @@ private:
     Ui::MainWindow *ui;
     QTimer *timer_1s;
     int seconds{0};
-    int gui_seconds{0};
+    int gui_seconds{1};
     int countdown_seconds{3};
     int num_of_reps{4};
     int state{0};
@@ -40,6 +40,6 @@ private:
     QSound out_sound;
     void update_progressBar();
     bool finished = false;
-    enum State{IN, HOLD, OUT, COUNTDOWN};
+    enum State{COUNTDOWN, IN, HOLD, OUT};
 };
 #endif // MAINWINDOW_H
